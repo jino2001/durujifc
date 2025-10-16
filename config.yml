@@ -1,0 +1,116 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://fcduruji.netlify.app/
+
+collections:
+  - name: content
+    label: "საიტის შიგთავსი"
+    files:
+      - label: "მთავარი გვერდი"
+        name: homepage
+        file: content/site-content.json
+        format: json
+        fields:
+          - label: "ჰერო"
+            name: hero
+            widget: object
+            fields:
+              - { label: "სლოგანი", name: "headline", widget: "string" }
+              - { label: "ქვესათაური", name: "lead", widget: "text" }
+              - label: "პირველი ღილაკი"
+                name: primaryCta
+                widget: object
+                fields:
+                  - { label: "ტექსტი", name: "label", widget: "string" }
+                  - { label: "ბმული", name: "href", widget: "string" }
+              - label: "მეორე ღილაკი"
+                name: secondaryCta
+                widget: object
+                fields:
+                  - { label: "ტექსტი", name: "label", widget: "string" }
+                  - { label: "ბმული", name: "href", widget: "string" }
+          - label: "ჩვენ შესახებ"
+            name: about
+            widget: object
+            fields:
+              - { label: "სექციის სათაური", name: "title", widget: "string" }
+              - label: "ბარათები"
+                name: cards
+                widget: list
+                fields:
+                  - { label: "სათაური", name: "title", widget: "string" }
+                  - { label: "ტექსტი", name: "body", widget: "text" }
+          - label: "სიახლეები"
+            name: news
+            widget: object
+            fields:
+              - { label: "სექციის სათაური", name: "title", widget: "string" }
+              - label: "სიახლეები"
+                name: items
+                widget: list
+                fields:
+                  - { label: "სათაური", name: "title", widget: "string" }
+                  - { label: "მოკლე აღწერა", name: "excerpt", widget: "text" }
+                  - { label: "თარიღი", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+                  - { label: "სურათი", name: "image", widget: "image" }
+                  - { label: "ალტ-ტექსტი", name: "imageAlt", widget: "string" }
+          - label: "მოახლოებული მატჩები"
+            name: upcoming
+            widget: object
+            fields:
+              - { label: "სექციის სათაური", name: "title", widget: "string" }
+              - label: "მატჩები"
+                name: matches
+                widget: list
+                fields:
+                  - { label: "თარიღი", name: "date", widget: "string" }
+                  - { label: "დაპირისპირება", name: "matchup", widget: "string" }
+                  - { label: "ადგილი / დრო", name: "venue", widget: "string" }
+          - label: "შედეგები"
+            name: results
+            widget: object
+            fields:
+              - { label: "სექციის სათაური", name: "title", widget: "string" }
+              - label: "მატჩები"
+                name: items
+                widget: list
+                fields:
+                  - { label: "თარიღი", name: "date", widget: "string" }
+                  - { label: "მატჩი", name: "match", widget: "string" }
+                  - { label: "ჩემპიონატი", name: "league", widget: "string" }
+                  - { label: "შედეგი", name: "score", widget: "string" }
+                  - label: "შედეგის ტიპი"
+                    name: outcome
+                    widget: select
+                    options:
+                      - { label: "გამარჯვება", value: "win" }
+                      - { label: "ფრე", value: "draw" }
+                      - { label: "მარცხი", value: "loss" }
+          - label: "კონტაქტი"
+            name: contact
+            widget: object
+            fields:
+              - { label: "სექციის სათაური", name: "title", widget: "string" }
+              - { label: "ინფო ბლოკის სათაური", name: "infoTitle", widget: "string" }
+              - label: "კონტაქტები"
+                name: items
+                widget: list
+                fields:
+                  - { label: "აიკონი", name: "icon", widget: "string" }
+                  - { label: "ტექსტი", name: "label", widget: "string" }
+                  - { label: "ბმული", name: "href", widget: "string" }
+                  - { label: "Target ატრიბუტი", name: "target", widget: "string", required: false }
+                  - { label: "Rel ატრიბუტი", name: "rel", widget: "string", required: false }
+                  - { label: "Aria Label", name: "ariaLabel", widget: "string", required: false }
+          - label: "ქვედა კოლოფი"
+            name: footer
+            widget: object
+            fields:
+              - { label: "ტექსტი", name: "text", widget: "string" }

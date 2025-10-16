@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--
+  მთავარი HTML დოკუმენტი, რომელიც აწყობს მთლიან საიტს.
+  თითოეულ დიდ განყოფილებას წინ უძღვის განმარტებითი კომენტარი,
+  რათა მარტივად გაიგოთ რომელი ბლოკი რას ემსახურება.
+-->
+<html lang="ka">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Duruji FC — ოფიციალური გვერდი</title>
+    <!-- ფავიკონის სრული პაკეტი, რომ ჩანართზე ყველგან ერთიდაიგივე სიმბოლო გამოჩნდეს -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- ზედა ფიქსირებული ჰედერი ბრენდითა და ნავიგაციით -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#home">
+          <div class="logo-circle" aria-hidden="true">
+            <img src="images/logo.svg" alt="Duruji FC" />
+          </div>
+          <div class="brand-text">
+            <div class="team-name">Duruji FC</div>
+            <div class="team-sub">გუნდი • ლურჯი &amp; თეთრი</div>
+          </div>
+        </a>
+
+        <!-- მთავარი ნავიგაცია, რომელიც სექციებზე გადადის -->
+        <nav class="nav" aria-label="მთავარი ნავიგაცია">
+          <a href="#home">მთავარი</a>
+          <a href="#about">ჩვენ შესახებ</a>
+          <a href="#news">სიახლეები</a>
+          <a href="#upcoming">მატჩები</a>
+          <a href="#results">შედეგები</a>
+          <a href="#contact">კონტაქტი</a>
+        </nav>
+
+        <button class="menu-toggle" aria-label="მენიუს გახსნა" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ჰერო ბლოკი: მთავარი სლოგანი და მოქმედების ღილაკები -->
+      <section id="home" class="hero section" aria-labelledby="hero-title">
+        <!-- ბნელი გრადიენტი, რომელიც ფონურ ილუსტრაციას აჩრდილებს -->
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-content">
+          <h1 id="hero-title" class="headline">დურუჯი — სადაც თამაში სიყვარულით იწყება</h1>
+          <p class="lead">ჩვენ ვთამაშობთ გულით, არა მხოლოდ ბურთით</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#upcoming">მოახლოებული მატჩები</a>
+            <a class="btn btn-outline" href="#news">ბოლოს დამატებული სიახლეები</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- „ჩვენ შესახებ“ განყოფილება გუნდის ისტორიისა და მისიის მოკლედ გასაცნობად -->
+      <section id="about" class="section fade-in" aria-labelledby="about-title">
+        <div class="container">
+          <h2 id="about-title" class="section-title">ჩვენ შესახებ</h2>
+          <div class="about-grid" data-dynamic-list="about"></div>
+          <template id="about-card-template">
+            <article class="about-card">
+              <h3 data-field="title"></h3>
+              <p data-field="body"></p>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <!-- სიახლეების სლაიდერი სამივე უკანასკნელი სტატიით -->
+      <section id="news" class="section fade-in" aria-labelledby="news-title">
+        <div class="container">
+          <h2 id="news-title" class="section-title">სიახლეები</h2>
+
+          <div class="news-carousel" data-autoplay="true">
+            <button class="news-arrow" data-direction="prev" aria-label="წინა სიახლე">❮</button>
+
+            <div class="news-wrapper" aria-live="polite">
+              <div class="news-track" data-dynamic-list="news"></div>
+            </div>
+
+            <button class="news-arrow" data-direction="next" aria-label="შემდეგი სიახლე">❯</button>
+          </div>
+          <template id="news-card-template">
+            <article class="news-card">
+              <img data-attr-src="image" data-attr-alt="imageAlt" alt="" />
+              <div class="news-body">
+                <h3 data-field="title"></h3>
+                <p data-field="excerpt"></p>
+                <time data-field="formattedDate" data-attr-datetime="date"></time>
+              </div>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <!-- მოახლოებული მატჩების ჩამონათვალი მომდევნო თამაშის ვადებით -->
+      <section id="upcoming" class="section fade-in" aria-labelledby="upcoming-title">
+        <div class="container">
+          <h2 id="upcoming-title" class="section-title">მოახლოებული მატჩები</h2>
+
+          <div class="matches-list" data-dynamic-list="upcoming"></div>
+          <template id="match-card-template">
+            <article class="match-card">
+              <div class="match-left">
+                <div class="match-date" data-field="date"></div>
+                <div class="match-vs" data-field="matchup"></div>
+              </div>
+              <div class="match-right">
+                <div class="match-venue" data-field="venue"></div>
+              </div>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <!-- ბოლო მატჩების შედეგების ცხრილი; ირგვლივ შემომძარცული კონტეინერი -->
+      <section id="results" class="section fade-in" aria-labelledby="results-title">
+        <div class="container">
+          <h2 id="results-title" class="section-title">შედეგები</h2>
+
+          <div class="table-wrapper">
+            <!-- colgroup-ის მეშვეობით დიდ ეკრანებზე სვეტების პროპორციებს ვაკონტროლებთ -->
+            <table class="results-table">
+              <colgroup>
+                <col class="col-date" />
+                <col class="col-match" />
+                <col class="col-league" />
+                <col class="col-score" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">თარიღი</th>
+                  <th scope="col">მატჩი</th>
+                  <th scope="col">ჩემპიონატი</th>
+                  <th scope="col">შედეგი</th>
+                </tr>
+              </thead>
+              <tbody data-dynamic-list="results"></tbody>
+            </table>
+            <template id="result-row-template">
+              <tr>
+                <td data-label="თარიღი" data-field="date"></td>
+                <td data-label="მატჩი">
+                  <span class="matchup-text" data-field="match"></span>
+                </td>
+                <td data-label="ჩემპიონატი" data-field="league"></td>
+                <td class="score" data-label="შედეგი" data-field="score"></td>
+              </tr>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <!-- საკონტაქტო ბლოკი რეკომენდაციებითა და უკუკავშირის ფორმით -->
+      <section id="contact" class="section fade-in" aria-labelledby="contact-title">
+        <div class="container">
+          <h2 id="contact-title" class="section-title">კონტაქტი</h2>
+          <div class="contact-grid">
+            <article class="contact-card">
+              <h3 id="contact-info-title">რეკომენდაციები</h3>
+              <ul class="contact-list" data-dynamic-list="contact"></ul>
+              <template id="contact-item-template">
+                <li>
+                  <span class="contact-icon" aria-hidden="true" data-field="icon"></span>
+                  <a data-field="label" data-attr-href="href" data-attr-target="target" data-attr-rel="rel"></a>
+                </li>
+              </template>
+            </article>
+
+            <!-- უკუკავშირის ფორმა, რომელსაც JS ამოწმებს გაგზავნამდე -->
+            <form id="contact-form" novalidate>
+              <label for="contact-name">სახელი</label>
+              <input id="contact-name" type="text" name="name" placeholder="თქვი შენი სახელი" required />
+
+              <label for="contact-email">ელფოსტა</label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                placeholder="შენი ელფოსტა"
+                required
+                inputmode="email"
+                autocomplete="email"
+              />
+
+              <label for="contact-message">შეტყობინება</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="4"
+                placeholder="შენი შეტყობინება"
+                required
+              ></textarea>
+
+              <!-- ანტი-ბოტ დამალული ველი, რათა სპამი შემცირდეს -->
+              <input type="hidden" name="_gotcha" value="" />
+
+              <button type="submit" class="btn btn-primary">გაგზავნა</button>
+              <p id="contact-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ქვედა კოლოფი: საავტორო უფლება და მიმდინარე წელი, რომელსაც JS აწერინებს -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> <span id="footer-text">Duruji FC — ყველა უფლება დაცულია.</span></p>
+      </div>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

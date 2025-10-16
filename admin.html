@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+  Netlify CMS მართვის პანელი. ამ გვერდიდან შეგიძლიათ შეცვალოთ site-content.json
+  ფაილი და პირდაპირ Git რეპოში შეინახოთ ცვლილებები.
+-->
+<html lang="ka">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Duruji FC — მართვის პანელი</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        font-family: 'Fira Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: radial-gradient(circle at 20% 20%, #1e3a8a, #0f172a 60%);
+        color: #e2e8f0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1.5rem 3rem;
+        box-sizing: border-box;
+      }
+      body.cms-active {
+        place-items: initial;
+        padding: 0;
+      }
+      body.cms-active .cms-wrapper {
+        display: none;
+      }
+      .cms-wrapper {
+        width: min(960px, 100%);
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        border-radius: 18px;
+        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.55);
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        backdrop-filter: blur(12px);
+      }
+      .cms-intro {
+        margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+      }
+      .cms-intro h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        font-weight: 600;
+      }
+      .cms-intro p {
+        margin: 0;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.85);
+      }
+      .cms-launch {
+        margin-top: clamp(1.5rem, 3vw, 2rem);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.75rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.4));
+        color: #e0f2fe;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+      }
+      .cms-launch:hover,
+      .cms-launch:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 25px rgba(59, 130, 246, 0.35);
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.55));
+      }
+      .cms-launch svg {
+        width: 1.15rem;
+        height: 1.15rem;
+        fill: currentColor;
+      }
+      #cms-root {
+        margin-top: clamp(2rem, 4vw, 3rem);
+      }
+      .cms-note {
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        color: rgba(226, 232, 240, 0.75);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cms-wrapper">
+      <div class="cms-intro">
+        <h1>მართვის პანელი</h1>
+        <p>
+          აქედან შეგიძლია განაახლო ჰეროს ტექსტები, სიახლეები, მატჩები და საკონტაქტო ინფორმაცია.
+          „დამატება" და „შენახვა" ავტომატურად შეცვლის <code>content/site-content.json</code>
+          ფაილს.
+        </p>
+        <p class="cms-note">
+          შესვლისთვის საჭიროა Netlify Identity / Git Gateway. ავტორიზაციის შემდეგ დააჭირე
+          ღილაკს „პანელის გახსნა“.
+        </p>
+        <a class="cms-launch" href="#" id="cms-open">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5v4.59l3.3 3.3-1.41 1.41-3.89-3.88V7h1Z"
+            />
+          </svg>
+          პანელის გახსნა
+        </a>
+      </div>
+      <div id="cms-root"></div>
+    </div>
+    <div id="nc-root"></div>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      const launchButton = document.getElementById('cms-open');
+      let cmsBootstrapped = false;
+      const mountCMS = () => {
+        if (cmsBootstrapped) return;
+        if (!window.CMS) {
+          window.setTimeout(mountCMS, 120);
+          return;
+        }
+
+        cmsBootstrapped = true;
+        document.body.classList.add('cms-active');
+        CMS.init({ configPath: '/config.yml', locale: 'ka' });
+      };
+
+      launchButton?.addEventListener('click', (event) => {
+        event.preventDefault();
+        mountCMS();
+      });
+
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (user) {
+            mountCMS();
+          } else {
+            window.netlifyIdentity.on('login', () => {
+              mountCMS();
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

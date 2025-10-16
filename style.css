@@ -1,0 +1,967 @@
+/*
+  ძირითადი ფერების, ზომებისა და სივრცეების ცვლადები.
+  აქედან იმართება მთელი თემატიკა, რომლითაც საიტი ერთიანდება.
+*/
+:root {
+  --color-primary: #1c4ed8;
+  --color-primary-dark: #1239b0;
+  --color-secondary: #facc15;
+  --color-dark: #0f172a;
+  --color-light: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-surface: rgba(15, 23, 42, 0.8);
+  --container-max: 1180px;
+  --container-padding: clamp(1.25rem, 4vw, 2.75rem);
+  --section-spacing: clamp(4rem, 7vw, 6rem);
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ძირითადი ტექსტური პარამეტრები და ფონის ფერი */
+body {
+  margin: 0;
+  font-family: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+  background: #0b1120;
+  color: var(--color-light);
+  line-height: 1.6;
+}
+
+/* ბმულების ნაგულისხმევი ქცევა */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-secondary);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+/* ცენტრალური კონტეინერი, რომელიც ზღუდავს მაქსიმალურ სიგანეს */
+.container {
+  width: min(var(--container-max), 100%);
+  margin: 0 auto;
+  padding-inline: var(--container-padding);
+}
+
+/* საიტის ყველა სექციის საერთო პადინგი და პოზიციონირება */
+.section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+/* განყოფილებების სათაურების სტილი */
+.section-title {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-secondary);
+}
+
+/* ზედა ჰედერის ფიქსირებული ზოლი */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 35, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* ჰედერის შიდა გისოსი: ლოგო, ნავიგაცია და მენიუს ღილაკი */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+}
+
+/* ლოგოსა და ტექსტის ჰორიზონტალური შეკრება */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-circle {
+  width: 52px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-secondary);
+  background: radial-gradient(circle at 30% 30%, #3b82f6, #1e3a8a);
+}
+
+.brand-text {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.team-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.team-sub {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* მთავარი ნავიგაცია და მისი hover ანიმაციები */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ლინკის ქვედა ხაზის ანიმაცია */
+.nav a {
+  padding: 0.35rem 0;
+  position: relative;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+  width: 100%;
+  height: 2px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav a:focus-visible::after,
+.nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* მობილური ჰამბურგერ-ღილაკის სტილი */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: var(--color-light);
+  font-size: 1.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+/* ჰერო სექცია — ფონად სტადიონის ილუსტრაცია და მუქი გრადიენტი */
+.hero {
+  position: relative;
+  min-height: clamp(70vh, 82vh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-light);
+  padding-block: clamp(5rem, 12vw, 7rem);
+  background: linear-gradient(145deg, rgba(11, 17, 32, 0.88), rgba(11, 17, 32, 0.35)),
+    url("images/hero.svg") center/cover fixed;
+}
+
+/* ჰერო ფონზე გადაფარებული გრადიენტი უკეთესი წასაკითხად */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(11, 17, 32, 0.75), rgba(30, 58, 138, 0.25));
+  mix-blend-mode: multiply;
+}
+
+/* ჰეროს შიდა კონტენტი, რომელიც ცენტრალიზებულია */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: min(680px, 100%);
+}
+
+/* მთავარი სლოგანი — დიდი ზომის, ცენტრში განლაგებული ტექსტი */
+.headline {
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* სლოგანის განმარტებითი წინადადება */
+.lead {
+  max-width: 32ch;
+  color: rgba(241, 245, 249, 0.85);
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  margin: 0 auto 2rem;
+}
+
+/* ჰეროში განლაგებული ღილაკების ბლოკი */
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* უნივერსალური ღილაკის სტილი */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid transparent;
+}
+
+/* მთავარი CTA ღილაკი */
+.btn-primary {
+  background: var(--color-secondary);
+  color: #1f2937;
+  box-shadow: 0 10px 25px rgba(250, 204, 21, 0.2);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 35px rgba(250, 204, 21, 0.25);
+}
+
+/* კონტურის მქონე ალტერნატიული ღილაკი */
+.btn-outline {
+  background: transparent;
+  color: var(--color-light);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+/* სქროლზე ნაზი გამოჩენის ანიმაცია */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ორი ბარათის გისოსი გუნდის შესახებ ინფორმაციისთვის */
+.about-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* თითოეული ინფორმაციული ბლოკის დიზაინი */
+.about-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.45);
+}
+
+.about-card h3 {
+  margin-top: 0;
+  color: var(--color-secondary);
+  font-size: 1.4rem;
+}
+
+.about-card p {
+  margin-bottom: 0;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+/* სიახლეების სლაიდერის ძირითადი განლაგება */
+.news-carousel {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* კონტეინერი, რომელიც ჭრის გამოჩენილი ბარათების ფარგლებს */
+.news-wrapper {
+  overflow: hidden;
+}
+
+/* მოძრავი ტრეკი, რომელსაც JS გადაადგილებს */
+.news-track {
+  display: flex;
+  gap: 1.25rem;
+  transition: transform 0.5s ease;
+}
+
+/*
+  როდესაც ყველა ბარათი თავისუფლად ეტევა, კარუსელი "სტატიკურ" რეჟიმზე გადადის
+  და ბარათები უბრალოდ გრიდად ლაგდება — სლაიდერის ისრები იშლება.
+*/
+.news-carousel.news-static {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.news-carousel.news-static .news-wrapper {
+  overflow: visible;
+}
+
+.news-carousel.news-static .news-track {
+  justify-content: center;
+  flex-wrap: wrap;
+  transform: none !important;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.news-carousel.news-static .news-card {
+  min-width: clamp(260px, 32vw, 340px);
+  flex: 1 1 clamp(260px, 33%, 340px);
+}
+
+.news-carousel.news-static .news-arrow {
+  display: none;
+}
+
+/* ცალკეული სიახლის ბარათის სტილი */
+.news-card {
+  min-width: clamp(260px, 52vw, 340px);
+  flex: 0 0 clamp(260px, 52vw, 340px);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.4);
+}
+
+/* სიახლეების ილუსტრაციები ფიქსირებულ სიმაღლეზე */
+.news-card img {
+  height: clamp(160px, 26vw, 200px);
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* ბარათის შიდა ტექსტური შინაარსი */
+.news-body {
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  color: rgba(226, 232, 240, 0.85);
+  justify-items: center;
+  text-align: center;
+}
+
+.news-body h3 {
+  color: var(--color-light);
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.news-body time {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* მართვის ისრები ტრეკის გასასტუმრებლად */
+.news-arrow {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--color-light);
+  border-radius: 50%;
+  width: 42px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.news-arrow:hover,
+.news-arrow:focus-visible {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* მოახლოებული მატჩების გისოსი */
+.matches-list {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* მატჩის ბარათი, რომელიც მოიცავს თარიღსა და ადგილს */
+.match-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  justify-items: center;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  gap: clamp(1rem, 3vw, 1.75rem);
+  text-align: center;
+}
+
+/* მატჩის ბარათში მარცხენა/მარჯვენა სვეტების გისოსი */
+.match-left,
+.match-right {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+}
+
+.match-date {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.match-vs {
+  font-size: 1.1rem;
+}
+
+.match-venue {
+  color: var(--color-muted);
+}
+
+/* შედეგების ცხრილის დეკორატიული კონტეინერი */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: linear-gradient(160deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.55));
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.55);
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+  backdrop-filter: blur(6px);
+  width: min(920px, 100%);
+  margin-inline: auto;
+}
+
+/* ძირითადი ცხრილი, რომელიც გასაზრდელად ავტომატურ სიგანეებს იყენებს */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  line-height: 1.5;
+}
+
+/* სვეტების პროპორციული სიგანეები დიდ ეკრანებზე */
+.results-table col.col-date {
+  width: 18%;
+}
+
+.results-table col.col-match {
+  width: 34%;
+}
+
+.results-table col.col-league {
+  width: 32%;
+}
+
+.results-table col.col-score {
+  width: 16%;
+}
+
+/* სათაურის რიგი ნახევრად გამჭვირვალე ფერით */
+.results-table thead tr {
+  background: rgba(12, 18, 34, 0.65);
+}
+
+.results-table th,
+.results-table td {
+  padding: clamp(0.85rem, 2.2vw, 1.25rem) clamp(1rem, 3vw, 1.9rem);
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  font-size: clamp(0.92rem, 0.3vw + 0.88rem, 1.05rem);
+}
+
+/* ტანის რიგების hover ანიმაცია */
+.results-table tbody tr {
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.results-table tbody tr:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.results-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.results-table tbody tr:hover {
+  background: rgba(30, 64, 175, 0.45);
+  transform: translateY(-2px);
+}
+
+.results-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table th {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(0.78rem, 0.28vw + 0.74rem, 0.9rem);
+  color: var(--color-muted);
+}
+
+/* მატჩის სახელწოდება ერთ ხაზზე შესანარჩუნებლად */
+.matchup-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/*
+  >=901px ეკრანებზე მატჩის სვეტს ემატება სათაურის ლეიბლი,
+  რათა სათაური ზედა ნაწილში გაიმეოროს და ტექსტი ქვემოთ ჩაჯდეს.
+*/
+@media (min-width: 901px) {
+  .results-table td[data-label="მატჩი"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .results-table td[data-label="მატჩი"]::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: clamp(0.68rem, 0.2vw + 0.64rem, 0.78rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .results-table td[data-label="მატჩი"] .matchup-text {
+    white-space: nowrap;
+  }
+}
+
+/* შედეგის უჯრა, სადაც ანგარიშია მოყვანილი */
+.score {
+  font-weight: 700;
+  text-align: right;
+  font-size: clamp(1.05rem, 0.4vw + 1rem, 1.35rem);
+  font-variant-numeric: tabular-nums;
+}
+
+/* გამარჯვების შედეგი მწვანე ფერით გამოიკვეთება */
+.score.win {
+  color: #34d399;
+}
+
+/* ფრე და მარცხის ფერები, რათა CMS-იდან არჩეული სტატუსი ვიზუალურად გამოჩნდეს */
+.score.draw {
+  color: #fbbf24;
+}
+
+.score.loss {
+  color: #f87171;
+}
+
+/* საკონტაქტო ზონის ორრიგიანი განლაგება */
+.contact-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+/* სტატიკური საკონტაქტო ინფორმაციის ბარათი */
+.contact-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+  display: grid;
+  gap: 1rem;
+}
+
+/* საკონტაქტო ელემენტების ჩამონათვალი (იმეილი, ტელეფონი, სოციალური ქსელები) */
+.contact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* თითოეული ჩანაწერი ხაზი-ხაზზე მარცხნიდან იწყება */
+.contact-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1rem;
+}
+
+/* პიქტოგრამული წინამძღოლები */
+.contact-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* საკონტაქტო ბმულები თანმიმდევრულად გამოიყურებოდეს */
+.contact-list a {
+  color: var(--color-light);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-list a:hover,
+.contact-list a:focus-visible {
+  color: var(--color-secondary);
+}
+
+/* უკუკავშირის ფორმის სტრუქტურა */
+#contact-form {
+  display: grid;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ფორმის ლეიბლები */
+#contact-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ტექსტური ველები და ტექსტარეა ერთიანი სტილით */
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--color-light);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* აქტიური ველის სიგნალიზაცია ფოკუსზე */
+#contact-form input:focus-visible,
+#contact-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.25);
+}
+
+/* ფორმის სტატუსის შეტყობინება (შეცდომა/წარმატება) */
+#contact-status {
+  min-height: 1.25rem;
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* კლასები, რომლებიც JS-მა დაამატა „დურუჯი“-ს გასაანალიზებლად */
+.is-centered-duruji {
+  text-align: center !important;
+}
+
+.is-centered-duruji strong {
+  margin-inline: 0.2em;
+}
+
+/* კონტეინერები, სადაც ტექსტი ავტომატურად ცენტრში გადმოდის */
+.has-centered-duruji {
+  justify-items: center;
+}
+
+/* მატჩის ბარათისთვის ცენტრში გასწორებული ვერსია */
+.match-card.has-centered-duruji {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.match-card.has-centered-duruji .match-left,
+.match-card.has-centered-duruji .match-right {
+  justify-items: center;
+}
+
+/* სიახლეების ბარათში ცენტრალური გასწორება */
+.news-card.has-centered-duruji .news-body {
+  text-align: center;
+  justify-items: center;
+}
+
+/* საკონტაქტო ბარათის ცენტრალური ვარიაცია */
+.contact-card.has-centered-duruji {
+  text-align: center;
+}
+
+/* ქვედა კოლოფის საერთო ოფორმება */
+.site-footer {
+  padding: 2rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(10, 15, 35, 0.9);
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* ტაბლეტებისთვის ნავიგაციის ადაპტაცია */
+@media (max-width: 960px) {
+  .header-inner {
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+  }
+
+  .brand {
+    margin-right: auto;
+  }
+
+  .nav {
+    position: absolute;
+    inset: calc(100% + 0.5rem) 1rem auto;
+    flex-direction: column;
+    background: rgba(10, 15, 35, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1rem;
+    padding: 1rem;
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav.is-open {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/*
+  <=900px ეკრანებზე ცხრილი გარდაიქმნება ბარათებად,
+  რათა ინფორმაცია კარგად წაიკითხებოდეს ვიწრო სივრცეებში.
+*/
+@media (max-width: 900px) {
+  .table-wrapper {
+    padding: clamp(0.85rem, 2vw, 1.4rem);
+    width: 100%;
+  }
+
+  .results-table {
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .results-table colgroup {
+    display: none;
+  }
+
+  .results-table thead {
+    display: none;
+  }
+
+  .results-table tbody {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .results-table tbody tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: clamp(1.1rem, 4vw, 1.4rem);
+    margin: 0;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 1rem;
+    box-shadow: 0 16px 28px rgba(15, 23, 42, 0.45);
+  }
+
+  .results-table tbody tr:nth-child(odd),
+  .results-table tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.85);
+  }
+
+  .results-table td {
+    border-bottom: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: clamp(0.92rem, 2.8vw, 1.05rem);
+  }
+
+  /* მატჩის უჯრა მობილურზე მარცხნივ გასასწორებლად */
+  .results-table td[data-label="მატჩი"] {
+    align-items: flex-start;
+  }
+
+  .results-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .results-table td.score {
+    justify-self: start;
+    align-items: flex-start;
+    text-align: left;
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+  }
+
+  .results-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .matchup-text {
+    flex-wrap: wrap;
+    white-space: normal;
+    display: block;
+    text-align: left;
+  }
+}
+
+/* დამატებითი კორექციები მობილურისა და პატარა ტაბლეტებისთვის */
+@media (max-width: 640px) {
+  .hero {
+    text-align: center;
+    background-attachment: scroll;
+    min-height: auto;
+    padding-block: clamp(5rem, 14vw, 6.5rem);
+  }
+
+  .hero-content {
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .hero-cta {
+    justify-content: center;
+    width: min(100%, 320px);
+  }
+
+  .hero-cta .btn {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .news-carousel {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .news-arrow {
+    order: 0;
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .news-card {
+    min-width: clamp(260px, 70vw, 320px);
+    flex-basis: clamp(260px, 70vw, 320px);
+  }
+}
+
+/* ყველაზე ვიწრო მოწყობილობებზე შედეგები ერთ სვეტად ინთვლება */
+@media (max-width: 520px) {
+  .results-table tbody tr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .results-table td.score {
+    justify-self: stretch;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* ზედმეტი შემცირება ყველაზე პატარა ეკრანებისთვის */
+@media (max-width: 480px) {
+  .headline {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+  }
+
+  .lead {
+    font-size: clamp(0.95rem, 4.5vw, 1.1rem);
+  }
+
+  .news-card {
+    /* მობილურზე თითოეული ბარათი wrapper-ის სრულ სიგანეს იკავებს,
+       რათა ისრებით გადახვევისას ერთი სიახლე ბოლომდე ჩანდეს. */
+    min-width: 100%;
+    flex-basis: 100%;
+  }
+
+  .contact-grid {
+    gap: 1.5rem;
+  }
+
+  #contact-form,
+  .contact-card {
+    padding: clamp(1.25rem, 6vw, 1.75rem);
+  }
+}
+
+/* უფრო დიდ მონიტორებზე მსუბუქი გაწელვა და ჰეროს ზრდა */
+@media (min-width: 1200px) {
+  .hero {
+    min-height: clamp(76vh, 78vh, 820px);
+  }
+
+  .news-track {
+    gap: 1.75rem;
+  }
+
+  .news-card {
+    min-width: 360px;
+    flex-basis: 360px;
+  }
+
+  .news-carousel.news-static .news-card {
+    flex: 1 1 clamp(300px, 30%, 360px);
+    max-width: 360px;
+  }
+}

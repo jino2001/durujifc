@@ -1,0 +1,17 @@
+{
+  "name": "duruji-fc-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static landing page for Duruji FC with Netlify CMS integration.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "duruji",
+    "football",
+    "landing-page",
+    "netlify-cms"
+  ],
+  "author": "",
+  "license": "MIT"
+}
